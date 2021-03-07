@@ -1,0 +1,48 @@
+@mixin boton($color) {
+    background-color: $color;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+
+    a {
+        text-decoration: none;
+        color: black;
+        text-transform: uppercase;
+    }
+
+}
+
+
+@mixin box-sizing($box-model) {
+    box-sizing: $box-model;
+}
+
+@mixin imagen-fondo($imagen) {
+    background-image: url($imagen);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+//Media queries
+
+@mixin telefono {
+    @media screen and (max-width: #{$telefono}) {
+        // no se puede quedar vacio la media
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: #{$tablet}) {
+        // no se puede quedar vacio la media
+        @content;
+    }
+}
+
+@mixin gradiente ($color1, $color2) {
+    background: linear-gradient(to right, $color1, $color2);
+}

@@ -1,0 +1,397 @@
+@import "variables";
+@import "mixins";
+
+// aplico los mixins de box-sizing
+html {
+    @include box-sizing(border-box);
+}
+
+@font-face {
+    font-family: Staatliches;
+    src: url("../fonts/Staatliches-Regular.ttf");
+}
+
+body {
+    background-color: $azul;
+    font-family: Staatliches;
+    // no funciona
+    // @font-face {
+    //     font-family:"Staatliches";
+    //     src: url("../fonts/Staatliches-Regular.ttf");
+    // }
+}
+
+*,
+*:after,
+*:before {
+    @include box-sizing(border-box);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+
+    .logo {
+        padding: 1rem;
+        text-align: center;
+        background-color: $azul;
+    }
+
+    .navegacion {
+        background-color: $morado;
+
+        ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            justify-content: center;
+
+            a {
+                text-decoration: none;
+                text-transform: uppercase;
+                color: white;
+                margin: 0.5rem;
+
+                //pequeno efecto para cuando pases por encima
+                transition-property: background-color, color, font-size, text-decoration;
+                transition-duration: 1000ms;
+                transition-timing-function: ease-in;
+            }
+
+            a:hover {
+                color: $amarillo;
+            }
+        }
+    }
+}
+
+.main {
+
+    .contenedor {
+        //aqui declaro mi grid principal, he ido jugando con los diferentes articulos y situandolos en su sitio
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 33.33% 33.33% 33.33%;
+        grid-template-rows: 100px repeat(6, auto);
+        grid-template-areas:
+            "TIT TIT TIT"
+            "ART1 ART2 ART3"
+            "GRA1 GRA1 ART5"
+            "ART6 ART7 ART8"
+            "ART9 ART10 ART11"
+            "ART12 GRA2 GRA2"
+            "ART14 ART15 ART16"
+        ;
+
+        @include tablet {
+            //al llegar al breakpoint cambia la distribucion
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 100px repeat(9, auto);
+
+            grid-template-areas:
+                "TIT TIT"
+                "ART1 ART2"
+                "GRA1 GRA1"
+                "ART3 ART5"
+                "ART6 ART7"
+                "ART8 ART9"
+                "ART10 ART11"
+                "ART12 ART14"
+                "GRA2 GRA2"
+                "ART15 ART16"
+            ;
+        }
+
+        .titulo {
+            grid-area: TIT;
+            text-align: center;
+            color: $amarillo;
+            text-transform: uppercase;
+        }
+
+        width: 70%;
+        margin: 0 auto;
+
+        article {
+            background-color: $morado;
+            text-align: center;
+            padding-top: 0.5rem;
+
+            h2 {
+                color: white;
+            }
+
+            p {
+                color: $amarillo;
+                font-weight: 3rem;
+            }
+
+            img {
+                padding: 0 0.5rem 0 0.5rem;
+                width: 100%;
+            }
+        }
+
+        article:nth-of-type(1) {
+            grid-area: ART1;
+
+        }
+
+        article:nth-of-type(2) {
+            grid-area: ART2;
+        }
+
+        article:nth-of-type(3) {
+            grid-area: ART3;
+        }
+
+        article:nth-of-type(4) {
+            grid-area: GRA1;
+            padding-top: 0;
+
+            img {
+                height: 100%;
+                width: 100%;
+                padding: 0;
+            }
+        }
+
+        article:nth-of-type(5) {
+            grid-area: ART5;
+        }
+
+        article:nth-of-type(6) {
+            grid-area: ART6;
+        }
+
+        article:nth-of-type(7) {
+            grid-area: ART7;
+        }
+
+        article:nth-of-type(8) {
+            grid-area: ART8;
+        }
+
+        article:nth-of-type(9) {
+            grid-area: ART9;
+
+        }
+
+        article:nth-of-type(10) {
+            grid-area: ART10;
+        }
+
+        article:nth-of-type(11) {
+            grid-area: ART11;
+        }
+
+        article:nth-of-type(12) {
+            grid-area: ART12;
+        }
+
+        article:nth-of-type(13) {
+            grid-area: GRA2;
+            padding-top: 0;
+
+            img {
+                height: 100%;
+                width: 100%;
+                padding: 0;
+            }
+        }
+
+        article:nth-of-type(14) {
+            grid-area: ART14;
+        }
+
+        article:nth-of-type(15) {
+            grid-area: ART15;
+        }
+
+        article:nth-of-type(16) {
+            grid-area: ART16;
+        }
+    }
+}
+
+.footer {
+    background-color: $morado;
+    height: 75px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    margin-top: 1rem;
+}
+
+.contenedor-nosotros {
+    //defino el grid para la pagina de nosotros, con la distribucion conveniente
+    color: white;
+    margin: 0 auto;
+    width: 80%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100px auto 100px auto;
+    grid-template-areas:
+        "TIT1 TIT1"
+        "TXT IMG"
+        "TIT2 TIT2"
+        "MOT MOT"
+    ;
+
+    @include tablet {
+        //cambio su distribucion en el breakpoint
+        grid-template-columns: 100%;
+        grid-template-rows: 100px auto auto 100px auto;
+
+        grid-template-areas:
+            "TIT1"
+            "IMG"
+            "TXT"
+            "TIT2"
+            "MOT"
+        ;
+    }
+
+
+    .titulo1 {
+        grid-area: TIT1;
+        text-align: center;
+        color: $amarillo;
+        text-transform: uppercase;
+    }
+
+    .titulo2 {
+        grid-area: TIT2;
+        text-align: center;
+        color: $amarillo;
+        text-transform: uppercase;
+    }
+
+    .texto {
+        grid-area: TXT;
+        padding: 0 2rem 0 2rem;
+    }
+
+    .imagen {
+        grid-area: IMG;
+
+        img {
+            width: 100%;
+        }
+
+        margin: 0;
+
+        @include tablet {
+            width: 100%;
+        }
+    }
+
+
+    .motivos {
+        grid-area: MOT;
+        display: grid;
+        //utilizo el autofill para que se situen en la medida que les pida de min y max
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        text-align: center;
+        justify-self: center;
+
+        .tarjeta {
+            margin-right: 1rem;
+
+            h3 {
+                color: $amarillo;
+                text-transform: uppercase;
+            }
+        }
+
+        i {
+            font-size: 7rem;
+            color: white;
+        }
+
+        @include tablet {
+            //reajusto el autofill para que se situen en la medida que les pida de min y max
+            grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+        }
+
+    }
+}
+
+.main-carrito {
+    //aplico grid para el carrito
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100px auto;
+
+    grid-template-areas:
+        "TIT TIT"
+        "IMG DET"
+    ;
+
+    //cambio la distribucion al pasar al breakpoint
+    @include tablet {
+        grid-template-columns: 100%;
+        grid-template-rows: 100px auto auto;
+
+        grid-template-areas:
+            "TIT"
+            "IMG"
+            "DET"
+        ;
+
+    }
+
+    .imagen {
+        grid-area: IMG;
+        text-align: right;
+        margin-right: 2rem;
+    }
+
+    @include tablet {
+        .imagen {
+            text-align: center;
+        }
+
+        .detalles {
+            margin: 0 auto;
+        }
+
+        .main {
+            margin: 0;
+        }
+
+    }
+
+
+    .titulo {
+        grid-area: TIT;
+        text-align: center;
+        color: $amarillo;
+        text-transform: uppercase;
+    }
+
+    .detalles {
+        grid-area: DET;
+        width: 60%;
+
+        p {
+            color: white;
+        }
+    }
+
+    .select {
+        border: 10px solid $morado;
+        margin-right: 1rem;
+    }
+
+    .cantidad {
+        border: 10px solid $morado;
+    }
+
+    .boton {
+        @include boton($amarillo);
+    }
+}

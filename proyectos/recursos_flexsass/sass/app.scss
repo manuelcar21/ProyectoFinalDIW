@@ -1,0 +1,298 @@
+@import "variables";
+@import "mixins";
+
+// aplico los mixins de box-sizing
+html {
+    @include box-sizing(border-box);
+}
+
+*,
+*:after,
+*:before {
+    @include box-sizing(border-box);
+}
+
+body {
+    background-color: $gris;
+}
+
+.header {
+
+    .navegacion {
+        // hago un flex, con espacio entre ellos para que se separen pero no tanto
+        display: flex;
+        justify-content: space-around;
+
+        // con esta media hago que pase a columna al disminiur la pantalla
+        @include tablet {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        .logo {
+            img {
+                flex: 0 0 20%;
+                height: 50px;
+            }
+        }
+
+        .menu {
+            ul {
+                display: flex;
+                // hago que el menu pase a columna cuando el tamaño es de telefono
+                @include telefono {
+                    flex-direction: column;
+                }    
+                li {
+                    list-style: none;
+                    margin-right: 1rem;
+
+                    a {
+                        text-decoration: none;
+                        color: $gris;
+                        font-size: 1rem;
+                    }
+
+                }
+
+            }
+        }
+
+        height: 100px;
+        align-items: center;
+        @include gradiente($gradiente1, $gradiente2);
+
+        // aumento la altura del header para que quepa todo
+        @include telefono {
+            height: 200px;
+        }    
+    }
+
+    .imagen_principal {
+        // uso la posicion relativa para tenerla de fondo
+        @include imagen-fondo('../img/hero.jpg');
+        height: 600px;
+        position: relative;
+        max-width: 100%;
+
+        h1 {
+            top: 200px;
+            left: 200px;
+
+            @include tablet {
+                top: 100px;
+                left: 50px;
+            }
+            @include telefono {
+                left: 65px;
+            }
+            // con la posicion absoluta aqui me permite tomar de referencia la foto y jugat con top, left..
+            position: absolute;
+            font-family: $fuente_titular_uno_dos;
+            color: $textoHero;
+            text-transform: uppercase;
+            width: 30%;
+        }
+    }
+}
+
+.main {
+    @include tablet {
+        margin: none;
+    }
+
+    background-color: $gris;
+
+    h2 {
+        text-align: center;
+        font-family: $fuente_titular_uno_dos;
+    }
+
+    .entradas {
+        width: 80%;
+        justify-content: space-between;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+
+        .entrada {
+
+            background-color: white;
+            margin-top: 1rem;
+
+            .contenido {
+                text-align: center;
+                text-transform: uppercase;
+                padding: 1rem;
+
+                h3 {
+                    font-family: $fuente_titular_tres_cuatro;
+                }
+
+                .boton {
+                    margin: 0 auto;
+                    @include boton($botones);
+                }
+            }
+
+            img {
+                max-width: 100%;
+            }
+
+            width: 30%;
+            // voy cambiando los tamaños de las entradas 
+            @include tablet {
+                width: 50%;
+            }
+
+            @include telefono {
+                width: 100%;
+            }
+
+            // flex: 0 1 calc((100%/3) - 1rem);
+
+        }
+
+
+    }
+
+
+    .secciones {
+        background-color: royalblue;
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 2rem;
+
+        // utilizo los mixins para cada seccion solo cambiando el color que es lo que varia
+        .seccion1 {
+            @include secciones($categoria_ruta);
+        }
+
+        .seccion2 {
+            @include secciones($categoria_mecanica);
+        }
+
+        .seccion3 {
+            @include secciones($categoria_bicicletas);
+        }
+
+        .seccion4 {
+            @include secciones($categoria_consejos);
+        }
+
+        margin-bottom: 1rem;
+
+        //aqui cambio el tamaño de las secciones porque quiero solo dos por fila
+        @include tablet {
+
+            .seccion1 {
+
+                flex: 0 1 calc((100%/2));
+            }
+
+            .seccion2 {
+                flex: 0 1 calc((100%/2));
+            }
+
+            .seccion3 {
+                flex: 0 1 calc((100%/2));
+            }
+
+            .seccion4 {
+                flex: 0 1 calc((100%/2));
+            }
+
+        }
+
+        // vuelvo a cambiar para poner solo una
+        @include telefono {
+
+            .seccion1 {
+
+                flex: 0 1 100%;
+            }
+
+            .seccion2 {
+                flex: 0 1 100%;
+            }
+
+            .seccion3 {
+                flex: 0 1 100%;
+            }
+
+            .seccion4 {
+                flex: 0 1 100%;
+            }
+
+        }
+    }
+
+}
+
+.footer {
+
+
+    .primeraParte {
+        background-color: $footer;
+        display: flex;
+        justify-content: center;
+        color: $gris;
+
+        // le doy un ancho a cada entrada
+
+        .primeraEntrada {
+            flex: 0 1 calc((80%/3));
+        }
+
+        .segundaEntrada {
+            flex: 0 1 calc((80%/3));
+        }
+
+        .terceraEntrada {
+            flex: 0 1 calc((80%/3));
+
+            .iconos {
+                display: flex;
+                justify-content: space-around;
+
+                i {
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        @include tablet {
+            // hago que pasen a columna
+            flex-direction: column;
+
+            .terceraEntrada {
+                .iconos {
+                    justify-content: center;
+
+                    .icono2 {
+                        margin-right: 1rem;
+                    }
+
+                }
+            }
+        }
+    }
+
+
+
+    .final {
+        background-color: $footerCopy;
+        color: $gris;
+        text-align: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+    }
+
+}

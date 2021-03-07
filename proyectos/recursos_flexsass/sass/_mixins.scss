@@ -1,0 +1,65 @@
+@mixin boton($color) {
+    background-color: $color;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    width: 35%;
+    border-radius: 1rem;
+}
+
+@mixin secciones($color) {
+    flex: 0 1 calc((100%/4));
+    background-color: $color;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .icono {
+        i {
+            font-size: 3rem;
+            color: white;
+        }
+    }
+
+    p {
+        font-size: 1rem;
+        color: $gris;
+    }
+}
+
+@mixin box-sizing($box-model) {
+    box-sizing: $box-model;
+}
+
+@mixin imagen-fondo($imagen) {
+    background-image: url($imagen);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+//Media queries
+
+@mixin telefono {
+    @media screen and (max-width: #{$telefono}) {
+        // no se puede quedar vacio la media
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: #{$tablet}) {
+        // no se puede quedar vacio la media
+        @content;
+    }
+}
+
+@mixin gradiente ($color1, $color2) {
+    background: linear-gradient(to right, $color1, $color2);
+}

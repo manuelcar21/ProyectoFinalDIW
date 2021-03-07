@@ -1,0 +1,375 @@
+@import "variables";
+@import "mixins";
+
+// aplico los mixins de box-sizing
+html {
+    @include box-sizing(border-box);
+}
+
+*,
+*:after,
+*:before {
+    @include box-sizing(border-box);
+}
+
+body {
+    margin: 0;
+
+}
+
+.cuerpo {
+    background-color: $gris;
+}
+
+.header {
+
+    .navegacion {
+        // hago un flex, con espacio entre ellos para que se separen pero no tanto
+        display: flex;
+        justify-content: space-around;
+
+        // con esta media hago que pase a columna al disminiur la pantalla
+        @include tablet {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        .logo {
+            img {
+                flex: 0 0 20%;
+                height: 100px;
+            }
+        }
+
+        .menu {
+            display: flex;
+
+            ul {
+                display: flex;
+
+                // hago que el menu pase a columna cuando el tamaño es de telefono
+                @include telefono {
+                    flex-direction: column;
+                }
+
+                li {
+                    list-style: none;
+                    margin-right: 1rem;
+
+                    a {
+                        text-decoration: none;
+                        color: $footer;
+                        font-size: 1rem;
+                    }
+
+                }
+
+            }
+        }
+
+        height: 100px;
+        align-items: center;
+        @include gradiente($gradiente1, $gradiente2);
+
+        // aumento la altura del header para que quepa todo
+        @include telefono {
+            height: 200px;
+        }
+    }
+
+    .imagen_principal {
+        // uso la posicion relativa para tenerla de fondo
+        @include imagen-fondo('../img/hero3.jpg');
+        height: 600px;
+        position: relative;
+        max-width: 100%;
+        margin-bottom: 2rem;
+        text-align: center;
+
+
+        .flotante {
+            top: 75px;
+            left: 100px;
+            background-color: $gris;
+            height: 33%;
+            display: grid;
+            
+            .boton{
+                width: 35%;
+                a{
+                    text-align: center;
+                }
+                
+                justify-self: center;
+                margin-bottom: 0.5rem;
+            }
+            @include telefono {
+                height: 35%;
+
+                h1 {
+                    font-size: 1.5rem;
+                }
+            }
+
+            a {
+                color: white;
+                text-decoration: none;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            h1 {
+                text-transform: uppercase;
+
+            }
+
+            @include tablet {
+                top: 100px;
+                left: 50px;
+            }
+
+            @include telefono {
+                left: 65px;
+            }
+
+            // con la posicion absoluta aqui me permite tomar de referencia la foto y jugat con top, left..
+            position: absolute;
+
+            font-family: $fuente_titular_uno_dos;
+            color: black;
+
+            font-weight:bold;
+            width: 30%;
+
+            @include tablet {
+                width: 50%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.main {
+    @include tablet {
+        margin: none;
+    }
+
+    background-color: $gris;
+
+    h2 {
+        margin-top: 2rem;
+        text-align: center;
+        font-family: $fuente_titular_uno_dos;
+    }
+
+    hr {
+        width: 80%;
+
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+
+    .entradas {
+        width: 80%;
+        justify-content: space-between;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+
+        .entrada {
+
+            background-color: white;
+            margin-top: 1rem;
+
+            .contenido {
+                text-align: center;
+                text-transform: uppercase;
+                padding: 1rem;
+
+                h3 {
+                    font-family: $fuente_titular_tres_cuatro;
+                }
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                }
+            }
+
+            img {
+                max-width: 100%;
+            }
+
+            width: 30%;
+
+            // voy cambiando los tamaños de las entradas 
+            @include tablet {
+                width: 50%;
+            }
+
+            @include telefono {
+                width: 100%;
+            }
+
+        }
+
+
+    }
+
+    .servicios {
+        margin-top: 7rem;
+        padding: 1rem;
+        display: grid;
+        margin: 0 auto;
+        width: 80%;
+        // background-color: aquamarine;
+        background-color: $gradiente2;
+       
+        grid-template-columns: repeat(auto-fill, minmax(33.33%, 1fr));
+
+        // align-items: center;
+
+        @include tablet {
+            // background-color: yellow;
+            grid-template-columns: repeat(auto-fill, minmax(100%, 100%));
+            height: 550px;
+        }
+
+        @include telefono {
+            height: 750px;
+        }
+
+        .icono {
+            a {
+                color: $gris_oscuro;
+                font-size: 3rem;
+            }
+
+            span {
+                font-weight: bold;
+                font-size: 1.5rem;
+
+            }
+
+
+        }
+
+        .servicio1 {
+            text-align: center;
+            margin-right: 1rem;
+            
+            p {
+                text-align: left;
+                width: 50%;
+                margin: 0 auto;
+            }
+
+        }
+
+        .servicio2 {
+            text-align: center;
+            margin-right: 1rem;
+           
+            p {
+                text-align: left;
+                width: 50%;
+                margin: 0 auto;
+            }
+        }
+
+        .servicio3 {
+            text-align: center;
+
+            p {
+                text-align: left;
+                width: 50%;
+                margin: 0 auto;
+            }
+        }
+
+        @include tablet {
+
+            .servicio1,
+            .servicio2,
+            .servicio3 {
+                p {
+                    width: 80%;
+                    text-align: center;
+                }
+
+            }
+        }
+    }
+
+}
+
+.footer {
+    margin-top: 4rem;
+
+    .primeraParte {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        background-color: $gradiente1;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        justify-content: right;
+        grid-template-areas: "PRI SEG";
+
+        @include tablet {
+            grid-template-columns: 100%;
+            grid-template-rows: auto auto;
+
+            grid-template-areas:
+                "PRI"
+                "SEG";
+
+            .segundaEntrada {
+                margin: 0 auto;
+            }
+        }
+
+        .segundaEntrada {
+            .iconos {
+                display: flex;
+
+                .icono2 {
+                    i {
+                        font-size: 3rem;
+                        margin-right: 1rem;
+                    }
+                }
+
+            }
+
+            grid-area: SEG;
+        }
+
+        .primeraEntrada {
+            width: 60%;
+            margin: 0 auto;
+
+            grid-area: PRI;
+        }
+    }
+
+
+
+    .final {
+        background-color: $footerFinal;
+        color: $gris;
+
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        height: 100px;
+    }
+
+}
